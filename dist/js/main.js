@@ -19596,7 +19596,9 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 
 var AppActions = {
-	
+	saveVideo: function(video){
+		console.log(video);
+	}
 }
 
 module.exports = AppActions;
@@ -19614,15 +19616,15 @@ var AddForm = React.createClass({displayName: "AddForm",
 					React.createElement("h3", null, "Add Video"), 
 					React.createElement("form", {onSubmit: this.onSubmit}, 
 						React.createElement("div", {className: "form-group"}, 
-							React.createElement("label", null, "Video Title"), 
+							React.createElement("label", null, "Video Title"), React.createElement("br", null), 
 							React.createElement("input", {type: "text", className: "form-control", ref: "title"})
 						), 
 						React.createElement("div", {className: "form-group"}, 
-							React.createElement("label", null, "Video ID"), 
+							React.createElement("label", null, "Video ID"), React.createElement("br", null), 
 							React.createElement("input", {type: "text", className: "form-control", ref: "video_id"})
 						), 
 						React.createElement("div", {className: "form-group"}, 
-							React.createElement("label", null, "Video Description"), 
+							React.createElement("label", null, "Video Description"), React.createElement("br", null), 
 							React.createElement("textarea", {className: "form-control", ref: "description"})
 						), 
 						React.createElement("button", {type: "submit", className: "button"}, "Add")
@@ -19634,7 +19636,14 @@ var AddForm = React.createClass({displayName: "AddForm",
 
 	onSubmit: function(e){
 		e.preventDefault();
-		console.log(this.refs.title.value)
+		
+		var video = {
+			title: this.refs.title.value.trim(),
+			video_id: this.refs.video_id.value.trim(),
+			description: this.refs.description.value.trim()	
+		};
+
+		AppActions.saveVideo(video);
 	}
 });
 

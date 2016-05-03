@@ -10,15 +10,15 @@ var AddForm = React.createClass({
 					<h3>Add Video</h3>
 					<form onSubmit={this.onSubmit}>
 						<div className="form-group">
-							<label>Video Title</label>
+							<label>Video Title</label><br />
 							<input type="text" className="form-control" ref="title" />
 						</div>
 						<div className="form-group">
-							<label>Video ID</label>
+							<label>Video ID</label><br />
 							<input type="text" className="form-control" ref="video_id" />
 						</div>
 						<div className="form-group">
-							<label>Video Description</label>
+							<label>Video Description</label><br />
 							<textarea className="form-control" ref="description"></textarea>
 						</div>
 						<button type="submit" className="button">Add</button>
@@ -30,7 +30,14 @@ var AddForm = React.createClass({
 
 	onSubmit: function(e){
 		e.preventDefault();
-		console.log(this.refs.title.value)
+		
+		var video = {
+			title: this.refs.title.value.trim(),
+			video_id: this.refs.video_id.value.trim(),
+			description: this.refs.description.value.trim()	
+		};
+
+		AppActions.saveVideo(video);
 	}
 });
 
